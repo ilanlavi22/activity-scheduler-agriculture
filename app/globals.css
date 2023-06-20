@@ -2,26 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components {
+  .input-container {
+    @apply relative w-[280px];
+  }
+  .form-input {
+    @apply h-[48px] w-[280px] pr-10 pl-[22px] border border-[#908B83] rounded-[5px] p-2 text-sm bg-white;
+  }
+  .form-label {
+    @apply absolute top-0 bottom-0 p-0 m-0 h-3  left-4 pl-2 pr-3 flex items-center translate-y-[-50%] bg-white font-semibold text-sm;
+  }
+  .form-icon {
+    @apply text-xl absolute top-0 right-[10px] translate-y-[75%];
+  }
+  .form-button {
+    @apply bg-[#55A53F] h-[48px] w-[280px] rounded-[5px] text-white text-base font-medium cursor-pointer;
   }
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+input[type='date']::-webkit-inner-spin-button,
+input[type='date']::-webkit-calendar-picker-indicator,
+input[type='time']::-webkit-inner-spin-button,
+input[type='time']::-webkit-calendar-picker-indicator {
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+  left: -4px;
+  top: 0;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+}
+input::-webkit-date-and-time-value {
+  text-align: left;
+  padding-left: 16px;
 }
