@@ -7,12 +7,14 @@ import {
   FiUser,
   FiArrowDown,
   FiPlus,
+  FiAlertCircle,
 } from 'react-icons/fi';
 
 import { getTodayDate } from '@/utils/dates';
+import { checkForPitchConflict } from '../functions/checkForPitchConflict';
+
 import { useContext } from 'react';
 import { ActivitiesContext } from '@/utils/AppContext';
-
 import { useState } from 'react';
 
 export default function ActivityForm() {
@@ -23,8 +25,9 @@ export default function ActivityForm() {
     activityPitch: '',
     activityUser: '',
   });
-
   const { activities, setActivities } = useContext(ActivitiesContext);
+  const [error, setError] = useState('');
+  const hasPitchConflict = checkForPitchConflict(activities, activity);
 
   const handleChange = (e) => {
     setActivity({ ...activity, [e.target.name]: e.target.value });
@@ -34,13 +37,28 @@ export default function ActivityForm() {
     e.preventDefault();
 
     if (
-      activity.activityUser &&
+      activity.activityTime &&
       activity.activityType &&
-      activity.activityPitch
+      activity.activityPitch &&
+      activity.activityUser
     ) {
+      if (hasPitchConflict) {
+        setError('Only one activity can be scheduled  ');
+        return;
+      }
+
       const newActivity = { ...activity, id: new Date().getTime().toString() };
       setActivities([...activities, newActivity]);
-      setActivity({ activityUser: '', activityPitch: '', activityType: '' });
+      setActivity({
+        activityDate: getTodayDate(),
+        activityTime: '',
+        activityType: '',
+        activityPitch: '',
+        activityUser: '',
+      });
+      setError('');
+    } else {
+      setError('All fields are mandatory');
     }
   };
 
@@ -49,6 +67,13 @@ export default function ActivityForm() {
       <h3 className=' text-center mb-12 mt-3 font-bold text-xl'>
         New Activity
       </h3>
+      {error && (
+        <div className='flex items-center gap-4 justify-center w-full bg-red-300/80 mb-14 h-[48px] max-w-[900px] mx-auto rounded-[5px] text-sm font-semibold'>
+          <FiAlertCircle className='text-2xl' />
+          {error}
+        </div>
+      )}
+
       <form
         className='w-full flex flex-col items-center justify-center gap-8 mb-9 md:flex-row md:flex-wrap md:max-w-[1000px] md:mx-auto'
         onSubmit={handleSubmit}
@@ -87,10 +112,8 @@ export default function ActivityForm() {
 
         <div className='input-container'>
           <select
-            type='text'
             id='activityType'
             name='activityType'
-            aria-labelledby='label-type'
             className='form-input appearance-none'
             onChange={handleChange}
             value={activity.activityType}
@@ -108,15 +131,18 @@ export default function ActivityForm() {
         </div>
 
         <div className='input-container'>
-          <input
-            type='text'
+          <select
             id='activityPitch'
             name='activityPitch'
-            aria-labelledby='label-type'
-            className='form-input'
+            className='form-input appearance-none'
             value={activity.activityPitch}
             onChange={handleChange}
-          />
+          >
+            <option value='Undefined'>Select Pitch</option>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+          </select>
           <label htmlFor='activityPitch' className='form-label'>
             Pitch #
           </label>
@@ -125,10 +151,8 @@ export default function ActivityForm() {
 
         <div className='input-container'>
           <select
-            type='text'
             id='activityUser'
             name='activityUser'
-            aria-labelledby='label-type'
             className='form-input appearance-none'
             onChange={handleChange}
             value={activity.activityUser}
@@ -153,3 +177,16 @@ export default function ActivityForm() {
     </div>
   );
 }
+
+// const checkForPitchConflict = (activities, newActivity) => {
+//   for (const activity of activities) {
+//     if (
+//       newActivity.activityDate === activity.activityDate &&
+//       newActivity.activityTime === activity.activityTime &&
+//       newActivity.activityPitch === activity.activityPitch
+//     ) {
+//       return true;
+//     }
+//     return false;
+//   }
+// };

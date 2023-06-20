@@ -16,7 +16,9 @@ export default function ActivityList() {
         <>
           <h4 className='text-center font-semibold flex items-center justify-center mb-8 gap-2'>
             Total Activities
-            <span className='text-2xl text-[#55A53F] font-bold'>35</span>
+            <span className='text-2xl text-[#55A53F] font-bold'>
+              {activities.length}
+            </span>
           </h4>
 
           <div className='hidden md:grid md:grid-cols-item uppercase font-bold text-sm text-center py-4'>

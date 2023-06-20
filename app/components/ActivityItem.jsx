@@ -50,7 +50,7 @@ export default function ActivityItem({
         <span>{convertTime(activityTime)}</span>
         <span>{activityType}</span>
         <span>{activityUser}</span>
-        <span>1</span>
+        <span>{activityPitch}</span>
 
         <button className='flex items-center mx-auto text-center justify-center w-10 h-10 rounded-full bg-[#EB0D0D]'>
           <FiTrash2 className='text-white text-xl' />
