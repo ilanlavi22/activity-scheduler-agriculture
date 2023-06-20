@@ -7,13 +7,7 @@ import {
   WeatherSearch,
 } from './components';
 
-import getWeather from '@/lib/getWeather';
-
-export default async function Home() {
-  const data = getWeather();
-  const weatherData = await data;
-  console.log(weatherData);
-
+export default function Home() {
   return (
     <main>
       <section className='w-full min-h-[45vh] bg-hero bg-cover bg-center'>

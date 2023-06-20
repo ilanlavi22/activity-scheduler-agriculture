@@ -11,7 +11,7 @@ import {
 } from 'react-icons/fi';
 
 import { getTodayDate } from '@/utils/dates';
-import { checkForPitchConflict } from '../functions/checkForPitchConflict';
+import { checkForPitchConflict } from '@/functions/checkForPitchConflict';
 
 import { useContext } from 'react';
 import { ActivitiesContext } from '@/utils/AppContext';
@@ -43,7 +43,9 @@ export default function ActivityForm() {
       activity.activityUser
     ) {
       if (hasPitchConflict) {
-        setError('Only one activity can be scheduled  ');
+        setError(
+          'Activity is already assigned, each pitch can accommodate only one activity at a time.'
+        );
         return;
       }
 
@@ -68,7 +70,7 @@ export default function ActivityForm() {
         New Activity
       </h3>
       {error && (
-        <div className='flex items-center gap-4 justify-center w-full bg-red-300/80 mb-14 h-[48px] max-w-[900px] mx-auto rounded-[5px] text-sm font-semibold'>
+        <div className='flex items-center gap-4 justify-center w-full bg-red-300/80 mb-14 min-h-[48px] p-3 max-w-[900px] mx-auto rounded-[5px] text-sm font-semibold'>
           <FiAlertCircle className='text-2xl' />
           {error}
         </div>
