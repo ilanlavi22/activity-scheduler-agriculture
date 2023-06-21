@@ -1,34 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project
 
-## Getting Started
+## Schedule Activities - Agriculture
 
-First, run the development server:
+[GitHub Repository](https://github.com/ilanlavi22/activity-scheduler-agriculture)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+[Live preview / Vercel](https://activity-scheduler-agriculture.vercel.app)
+
+### Installation
+
+1. Clone the repository
+2. Install the dependencies
+
+```plaintext
+Run `npm install`, `yarn install`, or `pnpm i`
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Getting an API Key:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+   To use the weather data in this project, you'll need to obtain an API key from [OpenWeatherMap website](https://openweathermap.org/).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Setting Up API Key
 
-## Learn More
+In the root directory of your project, create a new file named `.env.local` if it doesn't already exist. Add the following line to the `.env` file, replacing `YOUR_API_KEY` with the actual API key you obtained from OpenWeatherMap:
 
-To learn more about Next.js, take a look at the following resources:
+```plaintext
+API_KEY=YOUR_API_KEY
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. To run locally on development mode just type npm start at terminal inside the folder where package.json resides.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```plaintext
+npm start
+```
 
-## Deploy on Vercel
+## Development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[] Developed using React/Next.js (version 13.4.6).
+<br>
+[] It uses Tailwind CSS as its styling framework
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To run locally on development mode just type npm start at terminal inside the folder where package.json resides.
+
+#### Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
+Please ensure that your pull request adheres to the following guidelines:
+
+- Explain the purpose and context of your changes.
+- Keep the code style consistent with the existing codebase.
+- Include documentation and relevant tests if applicable.
+
+For major changes, it is recommended to open an issue first to discuss your ideas and obtain feedback.
