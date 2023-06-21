@@ -2,11 +2,11 @@
 import { useContext } from 'react';
 import { ActivitiesContext } from '@/utils/AppContext';
 import { BiWinkSmile } from 'react-icons/bi';
-
 import ActivityItem from './ActivityItem';
 
 export default function ActivityList() {
   const { activities } = useContext(ActivitiesContext);
+
   return (
     <div className='bg-white p-6 pb-16 rounded-[5px] drop-shadow-boxShadow max-w-6xl mx-auto'>
       <h3 className='text-center mb-3 mt-3 font-bold text-xl leading-2'>

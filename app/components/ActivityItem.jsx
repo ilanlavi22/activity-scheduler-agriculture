@@ -1,8 +1,9 @@
 'use client';
+
+import { useContext } from 'react';
+import { convertDate, convertTime } from '@/utils/dates';
 import { FiTrash2, FiEdit } from 'react-icons/fi';
 import { ActivitiesContext } from '@/utils/AppContext';
-import { convertDate, convertTime } from '@/utils/dates';
-import { useContext } from 'react';
 
 export default function ActivityItem({
   id,
@@ -12,8 +13,7 @@ export default function ActivityItem({
   activityPitch,
   activityUser,
 }) {
-  const { removeItem, isEditing, setIsEditing, editItem } =
-    useContext(ActivitiesContext);
+  const { removeItem, editItem } = useContext(ActivitiesContext);
   return (
     <div className='border-t max-w-6xl mx-auto border-[rgb(188,182,173,0.5)] px-2 pr-2 md:px-0 py-4 last:border-b odd:bg-[#F9F5F2]'>
       <div className='flex w-full justify-between items-center gap-8 md:hidden'>

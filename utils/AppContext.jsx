@@ -1,11 +1,8 @@
 'use client';
-import { useContext, createContext, useState, useEffect } from 'react';
-import getWeather from '@/lib/getWeather';
+import { createContext, useState } from 'react';
 import { getTodayDate } from '@/utils/dates';
 
-// Create a context object
 export const ActivitiesContext = createContext('');
-export const WeatherContext = createContext('');
 
 export const ActivitiesProvider = ({ children }) => {
   const [activity, setActivity] = useState({

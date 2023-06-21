@@ -1,5 +1,6 @@
 export const checkForPitchConflict = (activities, newActivity) => {
   for (const activity of activities) {
+    if (newActivity.id === activity.id) continue;
     if (
       newActivity.activityDate === activity.activityDate &&
       newActivity.activityTime === activity.activityTime &&
@@ -7,6 +8,6 @@ export const checkForPitchConflict = (activities, newActivity) => {
     ) {
       return true;
     }
-    return false;
   }
+  return false;
 };

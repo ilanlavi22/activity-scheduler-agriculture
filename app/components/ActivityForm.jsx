@@ -1,5 +1,11 @@
 'use client';
 
+import { useState } from 'react';
+import { useContext } from 'react';
+import { getTodayDate } from '@/utils/dates';
+import { checkForPitchConflict } from '@/functions/checkForPitchConflict';
+import { ActivitiesContext } from '@/utils/AppContext';
+
 import {
   FiCalendar,
   FiClock,
@@ -9,12 +15,6 @@ import {
   FiPlus,
   FiAlertCircle,
 } from 'react-icons/fi';
-import { getTodayDate } from '@/utils/dates';
-import { checkForPitchConflict } from '@/functions/checkForPitchConflict';
-
-import { useContext } from 'react';
-import { ActivitiesContext } from '@/utils/AppContext';
-import { useState } from 'react';
 
 export default function ActivityForm() {
   const {
@@ -24,74 +24,67 @@ export default function ActivityForm() {
     setActivities,
     isEditing,
     setIsEditing,
-    editItem,
     editId,
     setEditId,
   } = useContext(ActivitiesContext);
   const [error, setError] = useState('');
-  const hasPitchConflict = checkForPitchConflict(activities, activity);
 
   const handleChange = (e) => {
-    setActivity({ ...activity, [e.target.name]: e.target.value });
+    setActivity({ ...activity, [e.target.name]: e.target.value, id: editId });
   };
 
   const handleSubmit = (e) => {
+    const hasPitchConflict = checkForPitchConflict(activities, activity);
     e.preventDefault();
+
     if (
-      activity.activityTime &&
-      activity.activityType &&
-      activity.activityPitch &&
-      activity.activityUser
+      !activity.activityTime ||
+      !activity.activityType ||
+      !activity.activityPitch ||
+      !activity.activityUser
     ) {
-      if (hasPitchConflict) {
-        setError(
-          'Activity is already assigned, each pitch can accommodate only one activity at a time.'
-        );
-        return;
-      }
-      if (isEditing) {
-        setActivities(
-          activities.map((item) => {
-            if (item.id === editId) {
-              return {
-                ...item,
-                activityType: activity.activityType,
-                activityTime: activity.activityTime,
-                activityPitch: activity.activityPitch,
-                activityUser: activity.activityUser,
-                activityDate: activity.activityDate,
-              };
-            }
-            return item;
-          })
-        );
-        setActivity({
-          activityDate: getTodayDate(),
-          activityTime: '',
-          activityType: '',
-          activityPitch: '',
-          activityUser: '',
-        });
-        setIsEditing(false);
-        setEditId(null);
-      } else {
-        const newActivity = {
-          ...activity,
-          id: new Date().getTime().toString(),
-        };
-        setActivities([...activities, newActivity]);
-        setActivity({
-          activityDate: getTodayDate(),
-          activityTime: '',
-          activityType: '',
-          activityPitch: '',
-          activityUser: '',
-        });
-        setError('');
-      }
-      // } else {
-      //   setError('All fields are mandatory');
+      setError('All fields are mandatory');
+      return;
     }
+    if (hasPitchConflict) {
+      setError(
+        'Activity is already assigned, each pitch can accommodate only one activity at a time.'
+      );
+      return;
+    }
+    if (isEditing) {
+      setActivities(
+        activities.map((item) => {
+          if (item.id === editId) {
+            return {
+              ...item,
+              activityType: activity.activityType,
+              activityTime: activity.activityTime,
+              activityPitch: activity.activityPitch,
+              activityUser: activity.activityUser,
+              activityDate: activity.activityDate,
+            };
+          }
+          return item;
+        })
+      );
+      setIsEditing(false);
+      setEditId(null);
+    } else {
+      const newActivity = {
+        ...activity,
+        id: new Date().getTime().toString(),
+      };
+      setActivities([...activities, newActivity]);
+      setError('');
+    }
+    setActivity({
+      activityDate: getTodayDate(),
+      activityTime: '',
+      activityType: '',
+      activityPitch: '',
+      activityUser: '',
+    });
   };
 
   return (

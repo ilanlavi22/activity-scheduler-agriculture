@@ -1,7 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-const colors = require('tailwindcss/colors');
-
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -20,15 +18,6 @@ module.exports = {
         item: 'repeat(6, minmax(100px, 1fr))',
       },
     },
-    // extend: {
-    //   colors: {
-    //     colorBody: '#e5dccd',
-    //     colorBorder: '#F9F5F2',
-    //     colorGreen: '#55A53F',
-    //     colorYellow: '#ecc94b',
-    //     colorRed: '#eb0d0d',
-    //   },
-    // },
   },
   plugins: [],
 };
