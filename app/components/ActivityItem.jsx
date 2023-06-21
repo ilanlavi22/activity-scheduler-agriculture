@@ -1,14 +1,19 @@
-import { FiTrash2 } from 'react-icons/fi';
-
+'use client';
+import { FiTrash2, FiEdit } from 'react-icons/fi';
+import { ActivitiesContext } from '@/utils/AppContext';
 import { convertDate, convertTime } from '@/utils/dates';
+import { useContext } from 'react';
 
 export default function ActivityItem({
+  id,
   activityDate,
   activityTime,
   activityType,
   activityPitch,
   activityUser,
 }) {
+  const { removeItem, isEditing, setIsEditing, editItem } =
+    useContext(ActivitiesContext);
   return (
     <div className='border-t max-w-6xl mx-auto border-[rgb(188,182,173,0.5)] px-2 pr-2 md:px-0 py-4 last:border-b odd:bg-[#F9F5F2]'>
       <div className='flex w-full justify-between items-center gap-8 md:hidden'>
@@ -39,9 +44,20 @@ export default function ActivityItem({
             </div>
           </div>
         </div>
-        <button className='flex shrink-0 items-center justify-center w-10 h-10 rounded-full bg-[#EB0D0D]'>
-          <FiTrash2 className='text-white text-xl' />
-        </button>
+        <div className='flex items-center mx-auto flex-col justify-center gap-2'>
+          <button
+            className='flex shrink-0 items-center justify-center w-8 h-8 rounded-full bg-[#EB0D0D]'
+            onClick={() => removeItem(id)}
+          >
+            <FiTrash2 className='text-white text-lg' />
+          </button>
+          <button
+            className='flex shrink-0 items-center justify-center w-8 h-8 rounded-full bg-[#55A53F]'
+            onClick={() => editItem(id)}
+          >
+            <FiEdit className='text-white text-lg' />
+          </button>
+        </div>
       </div>
 
       {/* md */}
@@ -52,9 +68,20 @@ export default function ActivityItem({
         <span>{activityUser}</span>
         <span>{activityPitch}</span>
 
-        <button className='flex items-center mx-auto text-center justify-center w-10 h-10 rounded-full bg-[#EB0D0D]'>
-          <FiTrash2 className='text-white text-xl' />
-        </button>
+        <div className='flex items-center mx-auto justify-center gap-2'>
+          <button
+            className='flex items-center text-center justify-center w-8 h-8 rounded-full bg-[#EB0D0D]'
+            onClick={() => removeItem(id)}
+          >
+            <FiTrash2 className='text-white text-lg' />
+          </button>
+          <button
+            className='flex items-center text-center justify-center w-8 h-8 rounded-full bg-[#55A53F]'
+            onClick={() => editItem(id)}
+          >
+            <FiEdit className='text-white text-lg' />
+          </button>
+        </div>
       </div>
     </div>
   );

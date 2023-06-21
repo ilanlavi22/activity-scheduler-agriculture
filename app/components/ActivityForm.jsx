@@ -9,7 +9,6 @@ import {
   FiPlus,
   FiAlertCircle,
 } from 'react-icons/fi';
-
 import { getTodayDate } from '@/utils/dates';
 import { checkForPitchConflict } from '@/functions/checkForPitchConflict';
 
@@ -18,14 +17,17 @@ import { ActivitiesContext } from '@/utils/AppContext';
 import { useState } from 'react';
 
 export default function ActivityForm() {
-  const [activity, setActivity] = useState({
-    activityDate: getTodayDate(),
-    activityTime: '',
-    activityType: '',
-    activityPitch: '',
-    activityUser: '',
-  });
-  const { activities, setActivities } = useContext(ActivitiesContext);
+  const {
+    activity,
+    setActivity,
+    activities,
+    setActivities,
+    isEditing,
+    setIsEditing,
+    editItem,
+    editId,
+    setEditId,
+  } = useContext(ActivitiesContext);
   const [error, setError] = useState('');
   const hasPitchConflict = checkForPitchConflict(activities, activity);
 
@@ -35,7 +37,6 @@ export default function ActivityForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (
       activity.activityTime &&
       activity.activityType &&
@@ -48,19 +49,48 @@ export default function ActivityForm() {
         );
         return;
       }
-
-      const newActivity = { ...activity, id: new Date().getTime().toString() };
-      setActivities([...activities, newActivity]);
-      setActivity({
-        activityDate: getTodayDate(),
-        activityTime: '',
-        activityType: '',
-        activityPitch: '',
-        activityUser: '',
-      });
-      setError('');
-    } else {
-      setError('All fields are mandatory');
+      if (isEditing) {
+        setActivities(
+          activities.map((item) => {
+            if (item.id === editId) {
+              return {
+                ...item,
+                activityType: activity.activityType,
+                activityTime: activity.activityTime,
+                activityPitch: activity.activityPitch,
+                activityUser: activity.activityUser,
+                activityDate: activity.activityDate,
+              };
+            }
+            return item;
+          })
+        );
+        setActivity({
+          activityDate: getTodayDate(),
+          activityTime: '',
+          activityType: '',
+          activityPitch: '',
+          activityUser: '',
+        });
+        setIsEditing(false);
+        setEditId(null);
+      } else {
+        const newActivity = {
+          ...activity,
+          id: new Date().getTime().toString(),
+        };
+        setActivities([...activities, newActivity]);
+        setActivity({
+          activityDate: getTodayDate(),
+          activityTime: '',
+          activityType: '',
+          activityPitch: '',
+          activityUser: '',
+        });
+        setError('');
+      }
+      // } else {
+      //   setError('All fields are mandatory');
     }
   };
 
@@ -170,8 +200,11 @@ export default function ActivityForm() {
           <FiUser className='form-icon' />
         </div>
         <div className='input-container text-white'>
-          <button className='form-button' type='submit'>
-            Add Activity
+          <button
+            className={`form-button ${isEditing && 'bg-[#D2A266]'}`}
+            type='submit'
+          >
+            {isEditing ? 'Edit Activity' : 'Add Activity'}
           </button>
           <FiPlus className='form-icon' />
         </div>
@@ -179,16 +212,3 @@ export default function ActivityForm() {
     </div>
   );
 }
-
-// const checkForPitchConflict = (activities, newActivity) => {
-//   for (const activity of activities) {
-//     if (
-//       newActivity.activityDate === activity.activityDate &&
-//       newActivity.activityTime === activity.activityTime &&
-//       newActivity.activityPitch === activity.activityPitch
-//     ) {
-//       return true;
-//     }
-//     return false;
-//   }
-// };
