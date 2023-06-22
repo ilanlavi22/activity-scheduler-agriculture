@@ -1,7 +1,7 @@
 ## Schedule Activities - Agriculture
 
 [GitHub Repository](https://github.com/ilanlavi22/activity-scheduler-agriculture)
-<br>
+
 [Live preview / Vercel](https://activity-scheduler-agriculture.vercel.app)
 
 ### <ins>Installation</ins>
@@ -72,14 +72,5 @@ To further enhance the application moving forward I would consider implementing 
 - Introduce Jest for comprehensive testing of the application's components and functionality (unit testing).
 - Refactor or divide "long components" into smaller, more manageable components, distinguishing between low-level and high-level components.
 
-### <ins>Contributing</ins>
-
-Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
-
-Please ensure that your pull request adheres to the following guidelines:
-
-- Explain the purpose and context of your changes.
-- Keep the code style consistent with the existing codebase.
-- Include documentation and relevant tests if applicable.
-
-For major changes, it is recommended to open an issue first to discuss your ideas and obtain feedback.
+**Note:**
+In the initial design, I incorporated a weather location search field, which was demonstrated in one of my [previous repository](https://github.com/ilanlavi22/WeatherApp-Frontend) ([live preview](https://weatherapp-frontend.netlify.app/)) . I plan to leverage its functionality as a suggested addition in the future.
