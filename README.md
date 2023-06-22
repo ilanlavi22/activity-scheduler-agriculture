@@ -57,13 +57,15 @@ npm run dev
 
 For the implementation, I have opted to utilize React/Next.js due to its various advantages. These include server-side rendering (SSR/IRS) for improved performance, enhanced SEO capabilities, and faster initial page loads.
 
-**Suggested Improvements:**<br>
+**Suggested Improvements:**
+
 To enhance the overall functionality, I recommend the following improvements:
 
 - Incorporate activity duration to effectively handle pitch stages and time overlaps.
 - Introduce an activity completed state, which can be optionally hidden (e.g., show/hide completed tasks).
 
 **Future Additions:**
+
 To further enhance the application moving forward I would consider implementing the following additions:
 
 - Integrate a backend server, such as MongoDB/Prisma, to manage the activities, pitches, and duration.
@@ -73,4 +75,5 @@ To further enhance the application moving forward I would consider implementing 
 - Refactor or divide "long components" into smaller, more manageable components, distinguishing between low-level and high-level components.
 
 **Note:**
+
 In the initial design, I incorporated a weather location search field, which was demonstrated in one of my [previous repository](https://github.com/ilanlavi22/WeatherApp-Frontend) ([live preview](https://weatherapp-frontend.netlify.app/)) . I plan to leverage its functionality as a suggested addition in the future.
