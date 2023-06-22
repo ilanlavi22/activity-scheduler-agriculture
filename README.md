@@ -25,10 +25,10 @@ Run `npm install`, `yarn install`, or `pnpm i`
 OWM_API_KEY=YOUR_API_KEY
 ```
 
-5. To run locally on development mode just type npm start at terminal inside the folder where package.json resides.
+5. To run locally on development mode just type npm run dev at terminal inside the folder where package.json resides.
 
 ```plaintext
-npm start
+npm run dev
 ```
 
 ### <ins>Information</ins>
@@ -38,12 +38,15 @@ npm start
 
 ### <ins>Tasks</ins>
 
-- ✅ Developed using React/Next.js (version 13.4.6).
-- ✅ A display should show all scheduled activities and weather summery on the front page.<br>
-- ✅ User should be able to schedule a new activity:<br> - 4 activity types are allowed: Mowing, Fertilisation, Irrigation and Aeration - Each activity has a date and time associated with it. - Each activity has a "task performer/user" associated with it. These can be - John, Tom or Tony. - Each activity is associated with one of 3 Pitches (Pitch 1, 2 and 3) and there
-  can only be one activity done on a pitch at one time.
+- ✅ A display should show all scheduled activities and weather summery on the front page.
+- ✅ User should be able to schedule a new activity:
 
-- ✅ User should be able to change the details of the activities (e.g. change the time)
+  - 4 activity types are allowed: Mowing, Fertilisation, Irrigation and Aeration.
+  - Each activity has a date and time associated with it.
+  - Each activity has a "task performer/user" associated with it. These can be - John, Tom or Tony.
+  - Each activity is associated with one of 3 Pitches (Pitch 1, 2 and 3) and there can only be one activity done on a pitch at one time.
+
+- ✅ User should be able to change the details of the activities (e.g. change the time).
 - ✅ User should be able to delete the activity.
 - ✅ The weather data should show current temperature and have some indication about rain/precipitation.
 - ✅ The display should be responsive.
@@ -52,20 +55,22 @@ npm start
 
 **Implementation:**
 
-I am using React/Next.js for the major benefits: Server-side rendering (SSR/IRS), better performance, improved SEO and faster initial page loads.
+For the implementation, I have opted to utilize React/Next.js due to its various advantages. These include server-side rendering (SSR/IRS) for improved performance, enhanced SEO capabilities, and faster initial page loads.
 
-**Improvements suggested overall:**<br>
+**Suggested Improvements:**<br>
+To enhance the overall functionality, I recommend the following improvements:
 
-- Adding activity duration to better handle pitch stage and time overlaps.
-- Adding activity completed state (could be hidden e.g. show/hide completed tasks).
+- Incorporate activity duration to effectively handle pitch stages and time overlaps.
+- Introduce an activity completed state, which can be optionally hidden (e.g., show/hide completed tasks).
 
-**Additions moving forward:**
+**Future Additions:**
+To further enhance the application moving forward I would consider implementing the following additions:
 
-- Adding a backend server (provider e.g. MongoDB/Prisma) to handle the activities pitches/time.
-- Adding backend validation / schema validation / per-field validation.
-- I would probably use a react-query or redux for state management. Currently I am using useContext Hook.
-- Adding Jest to test the app components and functionality (unit testing)
-- Dividing/refactor "long components" (low/high level components).
+- Integrate a backend server, such as MongoDB/Prisma, to manage the activities, pitches, and duration.
+- Implement backend validation, schema validation, and per-field validation to ensure data integrity.
+- Consider utilizing a state management solution like react-query or redux instead of the current useContext Hook.
+- Introduce Jest for comprehensive testing of the application's components and functionality (unit testing).
+- Refactor or divide "long components" into smaller, more manageable components, distinguishing between low-level and high-level components.
 
 ### <ins>Contributing</ins>
 
