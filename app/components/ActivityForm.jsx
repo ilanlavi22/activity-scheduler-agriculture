@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useContext } from 'react';
 import { getTodayDate } from '@/utils/dates';
+import activityTypes from '@/data/activityTypes';
 import { checkForPitchConflict } from '@/functions/checkForPitchConflict';
 import { ActivitiesContext } from '@/utils/AppContext';
 
@@ -34,12 +35,22 @@ export default function ActivityForm() {
   };
 
   const handleSubmit = (e) => {
-    const hasPitchConflict = checkForPitchConflict(activities, activity);
     e.preventDefault();
+
+    const activityType = activityTypes.find(
+      (item) => item.id === parseInt(activity.activityTypeId)
+    );
+    const activityWithNameAndDuration = {
+      ...activity,
+      activityTypeName: activityType.name,
+      activityTypeDuration: activityType.duration,
+    };
+    console.log(activity);
+    const hasPitchConflict = checkForPitchConflict(activities, activity);
 
     if (
       !activity.activityTime ||
-      !activity.activityType ||
+      !activity.activityTypeId ||
       !activity.activityPitch ||
       !activity.activityUser
     ) {
@@ -72,7 +83,7 @@ export default function ActivityForm() {
       setEditId(null);
     } else {
       const newActivity = {
-        ...activity,
+        ...activityWithNameAndDuration,
         id: new Date().getTime().toString(),
       };
       setActivities([...activities, newActivity]);
@@ -81,7 +92,7 @@ export default function ActivityForm() {
     setActivity({
       activityDate: getTodayDate(),
       activityTime: '',
-      activityType: '',
+      activityTypeId: '',
       activityPitch: '',
       activityUser: '',
     });
@@ -138,18 +149,21 @@ export default function ActivityForm() {
         <div className='input-container'>
           <select
             id='activityType'
-            name='activityType'
+            name='activityTypeId'
             className='form-input appearance-none'
             onChange={handleChange}
-            value={activity.activityType}
+            value={activity.activityTypeId}
           >
             <option value='Undefined'>Select Type</option>
-            <option value='Mowing'>Mowing</option>
-            <option value='Fertilisation'>Fertilisation</option>
-            <option value='Irrigation'>Irrigation</option>
-            <option value='Aeration'>Aeration</option>
+            {activityTypes?.map((activity) => {
+              return (
+                <option key={activity.id} value={activity.id}>
+                  {activity.name}
+                </option>
+              );
+            })}
           </select>
-          <label htmlFor='activityType' className='form-label'>
+          <label htmlFor='activityTypeId' className='form-label'>
             Type
           </label>
           <FiArrowDown className='form-icon' />

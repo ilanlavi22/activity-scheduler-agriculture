@@ -9,7 +9,7 @@ export default function ActivityItem({
   id,
   activityDate,
   activityTime,
-  activityType,
+  activityTypeName,
   activityPitch,
   activityUser,
 }) {
@@ -30,7 +30,7 @@ export default function ActivityItem({
                 TYPE
               </span>
               <span className='text-[0.8125rem] font-light'>
-                {activityType}
+                {activityTypeName}
               </span>
             </div>
 
@@ -64,7 +64,7 @@ export default function ActivityItem({
       <div className='hidden md:grid md:grid-cols-item text-sm text-center'>
         <span>{convertDate(activityDate)}</span>
         <span>{convertTime(activityTime)}</span>
-        <span>{activityType}</span>
+        <span>{activityTypeName}</span>
         <span>{activityUser}</span>
         <span>{activityPitch}</span>
 
