@@ -4,6 +4,7 @@ export default function WeatherSearch() {
     <form className='flex mx-auto max-w-[700px] px-9 relative'>
       <input
         type='text'
+        name='search'
         placeholder='Enter Location'
         className='w-full p-[0.7rem] rounded-[10px] border-none outline-none bg-[rgb(255,255,255,0.4)] text-white text-base placeholder:text-white drop-shadow-boxShadow'
       ></input>

@@ -40,6 +40,9 @@ export default function ActivityForm() {
     const activityType = activityTypes.find(
       (item) => item.id === parseInt(activity.activityTypeId)
     );
+    console.log(activity.activityTypeId);
+    console.log(activityTypes);
+
     const activityWithNameAndDuration = {
       ...activity,
       activityTypeName: activityType.name,
@@ -64,12 +67,13 @@ export default function ActivityForm() {
       return;
     }
     if (isEditing) {
+      console.log(activities);
       setActivities(
         activities.map((item) => {
           if (item.id === editId) {
             return {
               ...item,
-              activityType: activity.activityType,
+              activityTypeName: activityWithNameAndDuration.activityTypeName,
               activityTime: activity.activityTime,
               activityPitch: activity.activityPitch,
               activityUser: activity.activityUser,
@@ -86,7 +90,9 @@ export default function ActivityForm() {
         ...activityWithNameAndDuration,
         id: new Date().getTime().toString(),
       };
+      console.log(newActivity);
       setActivities([...activities, newActivity]);
+
       setError('');
     }
     setActivity({
@@ -97,6 +103,8 @@ export default function ActivityForm() {
       activityUser: '',
     });
   };
+  console.log('test');
+  console.log(activities);
 
   return (
     <div className='max-w-6xl mx-auto bg-white p-6 rounded-[5px] drop-shadow-boxShadow'>
@@ -148,7 +156,7 @@ export default function ActivityForm() {
 
         <div className='input-container'>
           <select
-            id='activityType'
+            id='activityTypeId'
             name='activityTypeId'
             className='form-input appearance-none'
             onChange={handleChange}

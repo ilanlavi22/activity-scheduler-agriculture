@@ -30,7 +30,7 @@ export const ActivitiesProvider = ({ children }) => {
     setActivity({
       activityDate: findActivity.activityDate,
       activityTime: findActivity.activityTime,
-      activityType: findActivity.activityType,
+      activityTypeId: findActivity.activityTypeId,
       activityPitch: findActivity.activityPitch,
       activityUser: findActivity.activityUser,
     });
